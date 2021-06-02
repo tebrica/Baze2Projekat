@@ -1,0 +1,677 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="BazeProjekatModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Avion">
+          <Key>
+            <PropertyRef Name="AID" />
+          </Key>
+          <Property Name="AID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Model" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Karta">
+          <Key>
+            <PropertyRef Name="KID" />
+          </Key>
+          <Property Name="KID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Klasa" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="LID_FK" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="JMBG_FK" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Let">
+          <Key>
+            <PropertyRef Name="LID" />
+          </Key>
+          <Property Name="LID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="AID_FK" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PID_FK" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="JMBG_FK" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Obavestenje">
+          <Key>
+            <PropertyRef Name="OID" />
+          </Key>
+          <Property Name="OID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Poruka" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="JMBG_FK" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Osoba">
+          <Key>
+            <PropertyRef Name="JMBG" />
+          </Key>
+          <Property Name="JMBG" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ImPrz" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Pilot">
+          <Key>
+            <PropertyRef Name="JMBG" />
+          </Key>
+          <Property Name="JMBG" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ImPrz" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Pista">
+          <Key>
+            <PropertyRef Name="PID" />
+          </Key>
+          <Property Name="PID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Kula" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Putnik">
+          <Key>
+            <PropertyRef Name="JMBG" />
+          </Key>
+          <Property Name="JMBG" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ImPrz" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Radnik">
+          <Key>
+            <PropertyRef Name="JMBG" />
+          </Key>
+          <Property Name="JMBG" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ImPrz" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Upravljati">
+          <Key>
+            <PropertyRef Name="UID" />
+          </Key>
+          <Property Name="AID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="JMBG" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="UID" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Karta_Let">
+          <End Role="Let" Type="Self.Let" Multiplicity="1" />
+          <End Role="Karta" Type="Self.Karta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Let">
+              <PropertyRef Name="LID" />
+            </Principal>
+            <Dependent Role="Karta">
+              <PropertyRef Name="LID_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Karta_Putnik">
+          <End Role="Putnik" Type="Self.Putnik" Multiplicity="0..1" />
+          <End Role="Karta" Type="Self.Karta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Putnik">
+              <PropertyRef Name="JMBG" />
+            </Principal>
+            <Dependent Role="Karta">
+              <PropertyRef Name="JMBG_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Let_Avion">
+          <End Role="Avion" Type="Self.Avion" Multiplicity="1" />
+          <End Role="Let" Type="Self.Let" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Avion">
+              <PropertyRef Name="AID" />
+            </Principal>
+            <Dependent Role="Let">
+              <PropertyRef Name="AID_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Let_Pista">
+          <End Role="Pista" Type="Self.Pista" Multiplicity="1" />
+          <End Role="Let" Type="Self.Let" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pista">
+              <PropertyRef Name="PID" />
+            </Principal>
+            <Dependent Role="Let">
+              <PropertyRef Name="PID_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Let_Radnik">
+          <End Role="Radnik" Type="Self.Radnik" Multiplicity="0..1" />
+          <End Role="Let" Type="Self.Let" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Radnik">
+              <PropertyRef Name="JMBG" />
+            </Principal>
+            <Dependent Role="Let">
+              <PropertyRef Name="JMBG_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Obavestenje_Radnik">
+          <End Role="Radnik" Type="Self.Radnik" Multiplicity="1" />
+          <End Role="Obavestenje" Type="Self.Obavestenje" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Radnik">
+              <PropertyRef Name="JMBG" />
+            </Principal>
+            <Dependent Role="Obavestenje">
+              <PropertyRef Name="JMBG_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pilot_Radnik">
+          <End Role="Radnik" Type="Self.Radnik" Multiplicity="1" />
+          <End Role="Pilot" Type="Self.Pilot" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Radnik">
+              <PropertyRef Name="JMBG" />
+            </Principal>
+            <Dependent Role="Pilot">
+              <PropertyRef Name="JMBG" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Putnik_Osoba">
+          <End Role="Osoba" Type="Self.Osoba" Multiplicity="1" />
+          <End Role="Putnik" Type="Self.Putnik" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Osoba">
+              <PropertyRef Name="JMBG" />
+            </Principal>
+            <Dependent Role="Putnik">
+              <PropertyRef Name="JMBG" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Radnik_Osoba">
+          <End Role="Osoba" Type="Self.Osoba" Multiplicity="1" />
+          <End Role="Radnik" Type="Self.Radnik" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Osoba">
+              <PropertyRef Name="JMBG" />
+            </Principal>
+            <Dependent Role="Radnik">
+              <PropertyRef Name="JMBG" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Upravljati_Avion">
+          <End Role="Avion" Type="Self.Avion" Multiplicity="1" />
+          <End Role="Upravljati" Type="Self.Upravljati" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Avion">
+              <PropertyRef Name="AID" />
+            </Principal>
+            <Dependent Role="Upravljati">
+              <PropertyRef Name="AID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Upravljati_Pilot">
+          <End Role="Pilot" Type="Self.Pilot" Multiplicity="1" />
+          <End Role="Upravljati" Type="Self.Upravljati" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pilot">
+              <PropertyRef Name="JMBG" />
+            </Principal>
+            <Dependent Role="Upravljati">
+              <PropertyRef Name="JMBG" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BazeProjekatModelStoreContainer">
+          <EntitySet Name="Avion" EntityType="Self.Avion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Karta" EntityType="Self.Karta" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Let" EntityType="Self.Let" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Obavestenje" EntityType="Self.Obavestenje" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Osoba" EntityType="Self.Osoba" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pilot" EntityType="Self.Pilot" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pista" EntityType="Self.Pista" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Putnik" EntityType="Self.Putnik" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Radnik" EntityType="Self.Radnik" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Upravljati" EntityType="Self.Upravljati" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Karta_Let" Association="Self.FK_Karta_Let">
+            <End Role="Let" EntitySet="Let" />
+            <End Role="Karta" EntitySet="Karta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Karta_Putnik" Association="Self.FK_Karta_Putnik">
+            <End Role="Putnik" EntitySet="Putnik" />
+            <End Role="Karta" EntitySet="Karta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Let_Avion" Association="Self.FK_Let_Avion">
+            <End Role="Avion" EntitySet="Avion" />
+            <End Role="Let" EntitySet="Let" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Let_Pista" Association="Self.FK_Let_Pista">
+            <End Role="Pista" EntitySet="Pista" />
+            <End Role="Let" EntitySet="Let" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Let_Radnik" Association="Self.FK_Let_Radnik">
+            <End Role="Radnik" EntitySet="Radnik" />
+            <End Role="Let" EntitySet="Let" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Obavestenje_Radnik" Association="Self.FK_Obavestenje_Radnik">
+            <End Role="Radnik" EntitySet="Radnik" />
+            <End Role="Obavestenje" EntitySet="Obavestenje" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pilot_Radnik" Association="Self.FK_Pilot_Radnik">
+            <End Role="Radnik" EntitySet="Radnik" />
+            <End Role="Pilot" EntitySet="Pilot" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Putnik_Osoba" Association="Self.FK_Putnik_Osoba">
+            <End Role="Osoba" EntitySet="Osoba" />
+            <End Role="Putnik" EntitySet="Putnik" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Radnik_Osoba" Association="Self.FK_Radnik_Osoba">
+            <End Role="Osoba" EntitySet="Osoba" />
+            <End Role="Radnik" EntitySet="Radnik" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Upravljati_Avion" Association="Self.FK_Upravljati_Avion">
+            <End Role="Avion" EntitySet="Avion" />
+            <End Role="Upravljati" EntitySet="Upravljati" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Upravljati_Pilot" Association="Self.FK_Upravljati_Pilot">
+            <End Role="Pilot" EntitySet="Pilot" />
+            <End Role="Upravljati" EntitySet="Upravljati" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BazeProjekatModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Avion">
+          <Key>
+            <PropertyRef Name="AID" />
+          </Key>
+          <Property Name="AID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Model" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Let" Relationship="Self.FK_Let_Avion" FromRole="Avion" ToRole="Let" />
+          <NavigationProperty Name="Upravljati" Relationship="Self.FK_Upravljati_Avion" FromRole="Avion" ToRole="Upravljati" />
+        </EntityType>
+        <EntityType Name="Karta">
+          <Key>
+            <PropertyRef Name="KID" />
+          </Key>
+          <Property Name="KID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Klasa" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LID_FK" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="JMBG_FK" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="true" />
+          <NavigationProperty Name="Let" Relationship="Self.FK_Karta_Let" FromRole="Karta" ToRole="Let" />
+          <NavigationProperty Name="Putnik" Relationship="Self.FK_Karta_Putnik" FromRole="Karta" ToRole="Putnik" />
+        </EntityType>
+        <EntityType Name="Let">
+          <Key>
+            <PropertyRef Name="LID" />
+          </Key>
+          <Property Name="LID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="AID_FK" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PID_FK" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="JMBG_FK" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="true" />
+          <NavigationProperty Name="Avion" Relationship="Self.FK_Let_Avion" FromRole="Let" ToRole="Avion" />
+          <NavigationProperty Name="Karta" Relationship="Self.FK_Karta_Let" FromRole="Let" ToRole="Karta" />
+          <NavigationProperty Name="Pista" Relationship="Self.FK_Let_Pista" FromRole="Let" ToRole="Pista" />
+          <NavigationProperty Name="Radnik" Relationship="Self.FK_Let_Radnik" FromRole="Let" ToRole="Radnik" />
+        </EntityType>
+        <EntityType Name="Obavestenje">
+          <Key>
+            <PropertyRef Name="OID" />
+          </Key>
+          <Property Name="OID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Poruka" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="JMBG_FK" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Radnik" Relationship="Self.FK_Obavestenje_Radnik" FromRole="Obavestenje" ToRole="Radnik" />
+        </EntityType>
+        <EntityType Name="Osoba">
+          <Key>
+            <PropertyRef Name="JMBG" />
+          </Key>
+          <Property Name="JMBG" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ImPrz" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Putnik" Relationship="Self.FK_Putnik_Osoba" FromRole="Osoba" ToRole="Putnik" />
+          <NavigationProperty Name="Radnik" Relationship="Self.FK_Radnik_Osoba" FromRole="Osoba" ToRole="Radnik" />
+        </EntityType>
+        <EntityType Name="Pilot">
+          <Key>
+            <PropertyRef Name="JMBG" />
+          </Key>
+          <Property Name="JMBG" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ImPrz" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Radnik" Relationship="Self.FK_Pilot_Radnik" FromRole="Pilot" ToRole="Radnik" />
+          <NavigationProperty Name="Upravljati" Relationship="Self.FK_Upravljati_Pilot" FromRole="Pilot" ToRole="Upravljati" />
+        </EntityType>
+        <EntityType Name="Pista">
+          <Key>
+            <PropertyRef Name="PID" />
+          </Key>
+          <Property Name="PID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Kula" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Let" Relationship="Self.FK_Let_Pista" FromRole="Pista" ToRole="Let" />
+        </EntityType>
+        <EntityType Name="Putnik">
+          <Key>
+            <PropertyRef Name="JMBG" />
+          </Key>
+          <Property Name="JMBG" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ImPrz" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Karta" Relationship="Self.FK_Karta_Putnik" FromRole="Putnik" ToRole="Karta" />
+          <NavigationProperty Name="Osoba" Relationship="Self.FK_Putnik_Osoba" FromRole="Putnik" ToRole="Osoba" />
+        </EntityType>
+        <EntityType Name="Radnik">
+          <Key>
+            <PropertyRef Name="JMBG" />
+          </Key>
+          <Property Name="JMBG" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ImPrz" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Let" Relationship="Self.FK_Let_Radnik" FromRole="Radnik" ToRole="Let" />
+          <NavigationProperty Name="Obavestenje" Relationship="Self.FK_Obavestenje_Radnik" FromRole="Radnik" ToRole="Obavestenje" />
+          <NavigationProperty Name="Osoba" Relationship="Self.FK_Radnik_Osoba" FromRole="Radnik" ToRole="Osoba" />
+          <NavigationProperty Name="Pilot" Relationship="Self.FK_Pilot_Radnik" FromRole="Radnik" ToRole="Pilot" />
+        </EntityType>
+        <EntityType Name="Upravljati">
+          <Key>
+            <PropertyRef Name="UID" />
+          </Key>
+          <Property Name="AID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="JMBG" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Avion" Relationship="Self.FK_Upravljati_Avion" FromRole="Upravljati" ToRole="Avion" />
+          <NavigationProperty Name="Pilot" Relationship="Self.FK_Upravljati_Pilot" FromRole="Upravljati" ToRole="Pilot" />
+        </EntityType>
+        <Association Name="FK_Let_Avion">
+          <End Role="Avion" Type="Self.Avion" Multiplicity="1" />
+          <End Role="Let" Type="Self.Let" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Avion">
+              <PropertyRef Name="AID" />
+            </Principal>
+            <Dependent Role="Let">
+              <PropertyRef Name="AID_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Upravljati_Avion">
+          <End Role="Avion" Type="Self.Avion" Multiplicity="1" />
+          <End Role="Upravljati" Type="Self.Upravljati" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Avion">
+              <PropertyRef Name="AID" />
+            </Principal>
+            <Dependent Role="Upravljati">
+              <PropertyRef Name="AID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Karta_Let">
+          <End Role="Let" Type="Self.Let" Multiplicity="1" />
+          <End Role="Karta" Type="Self.Karta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Let">
+              <PropertyRef Name="LID" />
+            </Principal>
+            <Dependent Role="Karta">
+              <PropertyRef Name="LID_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Karta_Putnik">
+          <End Role="Putnik" Type="Self.Putnik" Multiplicity="0..1" />
+          <End Role="Karta" Type="Self.Karta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Putnik">
+              <PropertyRef Name="JMBG" />
+            </Principal>
+            <Dependent Role="Karta">
+              <PropertyRef Name="JMBG_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Let_Pista">
+          <End Role="Pista" Type="Self.Pista" Multiplicity="1" />
+          <End Role="Let" Type="Self.Let" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pista">
+              <PropertyRef Name="PID" />
+            </Principal>
+            <Dependent Role="Let">
+              <PropertyRef Name="PID_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Let_Radnik">
+          <End Role="Radnik" Type="Self.Radnik" Multiplicity="0..1" />
+          <End Role="Let" Type="Self.Let" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Radnik">
+              <PropertyRef Name="JMBG" />
+            </Principal>
+            <Dependent Role="Let">
+              <PropertyRef Name="JMBG_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Obavestenje_Radnik">
+          <End Role="Radnik" Type="Self.Radnik" Multiplicity="1" />
+          <End Role="Obavestenje" Type="Self.Obavestenje" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Radnik">
+              <PropertyRef Name="JMBG" />
+            </Principal>
+            <Dependent Role="Obavestenje">
+              <PropertyRef Name="JMBG_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Putnik_Osoba">
+          <End Role="Osoba" Type="Self.Osoba" Multiplicity="1" />
+          <End Role="Putnik" Type="Self.Putnik" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Osoba">
+              <PropertyRef Name="JMBG" />
+            </Principal>
+            <Dependent Role="Putnik">
+              <PropertyRef Name="JMBG" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Radnik_Osoba">
+          <End Role="Osoba" Type="Self.Osoba" Multiplicity="1" />
+          <End Role="Radnik" Type="Self.Radnik" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Osoba">
+              <PropertyRef Name="JMBG" />
+            </Principal>
+            <Dependent Role="Radnik">
+              <PropertyRef Name="JMBG" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pilot_Radnik">
+          <End Role="Radnik" Type="Self.Radnik" Multiplicity="1" />
+          <End Role="Pilot" Type="Self.Pilot" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Radnik">
+              <PropertyRef Name="JMBG" />
+            </Principal>
+            <Dependent Role="Pilot">
+              <PropertyRef Name="JMBG" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Upravljati_Pilot">
+          <End Role="Pilot" Type="Self.Pilot" Multiplicity="1" />
+          <End Role="Upravljati" Type="Self.Upravljati" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pilot">
+              <PropertyRef Name="JMBG" />
+            </Principal>
+            <Dependent Role="Upravljati">
+              <PropertyRef Name="JMBG" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BazeProjekatEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Avion" EntityType="Self.Avion" />
+          <EntitySet Name="Karta" EntityType="Self.Karta" />
+          <EntitySet Name="Let" EntityType="Self.Let" />
+          <EntitySet Name="Obavestenje" EntityType="Self.Obavestenje" />
+          <EntitySet Name="Osoba" EntityType="Self.Osoba" />
+          <EntitySet Name="Pilot" EntityType="Self.Pilot" />
+          <EntitySet Name="Pista" EntityType="Self.Pista" />
+          <EntitySet Name="Putnik" EntityType="Self.Putnik" />
+          <EntitySet Name="Radnik" EntityType="Self.Radnik" />
+          <EntitySet Name="Upravljati" EntityType="Self.Upravljati" />
+          <AssociationSet Name="FK_Let_Avion" Association="Self.FK_Let_Avion">
+            <End Role="Avion" EntitySet="Avion" />
+            <End Role="Let" EntitySet="Let" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Upravljati_Avion" Association="Self.FK_Upravljati_Avion">
+            <End Role="Avion" EntitySet="Avion" />
+            <End Role="Upravljati" EntitySet="Upravljati" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Karta_Let" Association="Self.FK_Karta_Let">
+            <End Role="Let" EntitySet="Let" />
+            <End Role="Karta" EntitySet="Karta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Karta_Putnik" Association="Self.FK_Karta_Putnik">
+            <End Role="Putnik" EntitySet="Putnik" />
+            <End Role="Karta" EntitySet="Karta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Let_Pista" Association="Self.FK_Let_Pista">
+            <End Role="Pista" EntitySet="Pista" />
+            <End Role="Let" EntitySet="Let" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Let_Radnik" Association="Self.FK_Let_Radnik">
+            <End Role="Radnik" EntitySet="Radnik" />
+            <End Role="Let" EntitySet="Let" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Obavestenje_Radnik" Association="Self.FK_Obavestenje_Radnik">
+            <End Role="Radnik" EntitySet="Radnik" />
+            <End Role="Obavestenje" EntitySet="Obavestenje" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Putnik_Osoba" Association="Self.FK_Putnik_Osoba">
+            <End Role="Osoba" EntitySet="Osoba" />
+            <End Role="Putnik" EntitySet="Putnik" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Radnik_Osoba" Association="Self.FK_Radnik_Osoba">
+            <End Role="Osoba" EntitySet="Osoba" />
+            <End Role="Radnik" EntitySet="Radnik" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pilot_Radnik" Association="Self.FK_Pilot_Radnik">
+            <End Role="Radnik" EntitySet="Radnik" />
+            <End Role="Pilot" EntitySet="Pilot" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Upravljati_Pilot" Association="Self.FK_Upravljati_Pilot">
+            <End Role="Pilot" EntitySet="Pilot" />
+            <End Role="Upravljati" EntitySet="Upravljati" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BazeProjekatModelStoreContainer" CdmEntityContainer="BazeProjekatEntities">
+          <EntitySetMapping Name="Avion">
+            <EntityTypeMapping TypeName="BazeProjekatModel.Avion">
+              <MappingFragment StoreEntitySet="Avion">
+                <ScalarProperty Name="AID" ColumnName="AID" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Karta">
+            <EntityTypeMapping TypeName="BazeProjekatModel.Karta">
+              <MappingFragment StoreEntitySet="Karta">
+                <ScalarProperty Name="KID" ColumnName="KID" />
+                <ScalarProperty Name="Klasa" ColumnName="Klasa" />
+                <ScalarProperty Name="LID_FK" ColumnName="LID_FK" />
+                <ScalarProperty Name="JMBG_FK" ColumnName="JMBG_FK" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Let">
+            <EntityTypeMapping TypeName="BazeProjekatModel.Let">
+              <MappingFragment StoreEntitySet="Let">
+                <ScalarProperty Name="LID" ColumnName="LID" />
+                <ScalarProperty Name="AID_FK" ColumnName="AID_FK" />
+                <ScalarProperty Name="PID_FK" ColumnName="PID_FK" />
+                <ScalarProperty Name="JMBG_FK" ColumnName="JMBG_FK" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Obavestenje">
+            <EntityTypeMapping TypeName="BazeProjekatModel.Obavestenje">
+              <MappingFragment StoreEntitySet="Obavestenje">
+                <ScalarProperty Name="OID" ColumnName="OID" />
+                <ScalarProperty Name="Poruka" ColumnName="Poruka" />
+                <ScalarProperty Name="JMBG_FK" ColumnName="JMBG_FK" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Osoba">
+            <EntityTypeMapping TypeName="BazeProjekatModel.Osoba">
+              <MappingFragment StoreEntitySet="Osoba">
+                <ScalarProperty Name="JMBG" ColumnName="JMBG" />
+                <ScalarProperty Name="ImPrz" ColumnName="ImPrz" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pilot">
+            <EntityTypeMapping TypeName="BazeProjekatModel.Pilot">
+              <MappingFragment StoreEntitySet="Pilot">
+                <ScalarProperty Name="JMBG" ColumnName="JMBG" />
+                <ScalarProperty Name="ImPrz" ColumnName="ImPrz" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pista">
+            <EntityTypeMapping TypeName="BazeProjekatModel.Pista">
+              <MappingFragment StoreEntitySet="Pista">
+                <ScalarProperty Name="PID" ColumnName="PID" />
+                <ScalarProperty Name="Kula" ColumnName="Kula" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Putnik">
+            <EntityTypeMapping TypeName="BazeProjekatModel.Putnik">
+              <MappingFragment StoreEntitySet="Putnik">
+                <ScalarProperty Name="JMBG" ColumnName="JMBG" />
+                <ScalarProperty Name="ImPrz" ColumnName="ImPrz" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Radnik">
+            <EntityTypeMapping TypeName="BazeProjekatModel.Radnik">
+              <MappingFragment StoreEntitySet="Radnik">
+                <ScalarProperty Name="JMBG" ColumnName="JMBG" />
+                <ScalarProperty Name="ImPrz" ColumnName="ImPrz" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Upravljati">
+            <EntityTypeMapping TypeName="BazeProjekatModel.Upravljati">
+              <MappingFragment StoreEntitySet="Upravljati">
+                <ScalarProperty Name="AID" ColumnName="AID" />
+                <ScalarProperty Name="JMBG" ColumnName="JMBG" />
+                <ScalarProperty Name="UID" ColumnName="UID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

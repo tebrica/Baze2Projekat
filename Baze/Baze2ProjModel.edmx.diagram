@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="3ca5f1e2f58547968f915620028e0bb3" Name="Diagram1">
+        <EntityTypeShape EntityType="BazeProjekatModel.Avion" Width="1.5" PointX="8.375" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BazeProjekatModel.Karta" Width="1.5" PointX="5" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BazeProjekatModel.Let" Width="1.5" PointX="8.25" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BazeProjekatModel.Obavestenje" Width="1.5" PointX="5.375" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BazeProjekatModel.Osoba" Width="1.5" PointX="1.125" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="BazeProjekatModel.Pilot" Width="1.5" PointX="5.625" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BazeProjekatModel.Pista" Width="1.5" PointX="6" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BazeProjekatModel.Putnik" Width="1.5" PointX="3" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BazeProjekatModel.Radnik" Width="1.5" PointX="3" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BazeProjekatModel.Upravljati" Width="1.5" PointX="7.875" PointY="11.25" IsExpanded="true" />
+        <AssociationConnector Association="BazeProjekatModel.FK_Let_Avion" ManuallyRouted="false" />
+        <AssociationConnector Association="BazeProjekatModel.FK_Upravljati_Avion" ManuallyRouted="false" />
+        <AssociationConnector Association="BazeProjekatModel.FK_Karta_Let" ManuallyRouted="false" />
+        <AssociationConnector Association="BazeProjekatModel.FK_Karta_Putnik" ManuallyRouted="false" />
+        <AssociationConnector Association="BazeProjekatModel.FK_Let_Pista" ManuallyRouted="false" />
+        <AssociationConnector Association="BazeProjekatModel.FK_Let_Radnik" ManuallyRouted="false" />
+        <AssociationConnector Association="BazeProjekatModel.FK_Obavestenje_Radnik" ManuallyRouted="false" />
+        <AssociationConnector Association="BazeProjekatModel.FK_Putnik_Osoba" ManuallyRouted="false" />
+        <AssociationConnector Association="BazeProjekatModel.FK_Radnik_Osoba" ManuallyRouted="false" />
+        <AssociationConnector Association="BazeProjekatModel.FK_Pilot_Radnik" ManuallyRouted="false" />
+        <AssociationConnector Association="BazeProjekatModel.FK_Upravljati_Pilot" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

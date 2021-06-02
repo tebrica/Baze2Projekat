@@ -1,0 +1,30 @@
+﻿<Window x:Class="BazeProjekat.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BazeProjekat"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid Background="LightSteelBlue" Name="grid">
+        <Canvas Name="kanvas" Margin="0" HorizontalAlignment="Right" VerticalAlignment="Top" Width="800" Height="450"></Canvas>
+        <Button Background="LightSteelBlue" Foreground="Navy" Name="osoba" Width="100" Height="30" Content="Osoba" FontSize="15" Margin="20,20,20,20" HorizontalAlignment="Left" VerticalAlignment="Top" Click="osoba_Click"/>
+        <Button Background="LightSteelBlue" Foreground="Navy" Name="putnik" Width="100" Height="30" Content="Putnik" FontSize="15" Margin="20,60,20,20" HorizontalAlignment="Left" VerticalAlignment="Top" Click="putnik_Click"/>
+        <Button Background="LightSteelBlue" Foreground="Navy" Name="radnik" Width="100" Height="30" Content="Radnik" FontSize="15" Margin="20,100,20,20" HorizontalAlignment="Left" VerticalAlignment="Top" Click="radnik_Click"/>
+        <Button Background="LightSteelBlue" Foreground="Navy" Name="pilot" Width="100" Height="30" Content="Pilot" FontSize="15" Margin="20,140,20,20" HorizontalAlignment="Left" VerticalAlignment="Top" Click="pilot_Click"/>
+        <Button Background="LightSteelBlue" Foreground="Navy" Name="let" Width="100" Height="30" Content="Let" FontSize="15" Margin="20,180,20,20" HorizontalAlignment="Left" VerticalAlignment="Top" Click="let_Click"/>
+        <Button Background="LightSteelBlue" Foreground="Navy" Name="avion" Width="100" Height="30" Content="Avion" FontSize="15" Margin="20,220,20,20" HorizontalAlignment="Left" VerticalAlignment="Top" Click="avion_Click"/>
+        <Button Background="LightSteelBlue" Foreground="Navy" Name="pista" Width="100" Height="30" Content="Pista" FontSize="15" Margin="20,260,20,20" HorizontalAlignment="Left" VerticalAlignment="Top" Click="pista_Click"/>
+        <Button Background="LightSteelBlue" Foreground="Navy" Name="obavestenje" Width="100" Height="30" Content="Obavestenje" FontSize="15" Margin="20,300,20,20" HorizontalAlignment="Left" VerticalAlignment="Top" Click="obavestenje_Click"/>
+        <Button Background="LightSteelBlue" Foreground="Navy" Name="karta" Width="100" Height="30" Content="Karta" FontSize="15" Margin="20,340,20,20" HorizontalAlignment="Left" VerticalAlignment="Top" Click="karta_Click"/>
+        <Button Background="LightSteelBlue" Foreground="Navy" Name="upravljanja" Width="100" Height="30" Content="Upravljanja" FontSize="15" Margin="20,380,20,0" HorizontalAlignment="Left" VerticalAlignment="Top" Click="upravljanja_Click"/>
+        <TextBlock HorizontalAlignment="Right" Name="naslov" VerticalAlignment="Top" Text="AERODROM" Foreground="Navy" FontSize="30" FontWeight="ExtraBold" Margin="20 20 15 20"/>
+        <ScrollViewer x:Name="Skroler" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalScrollBarVisibility="Visible" Margin="200 10 200 10">
+                <StackPanel x:Name="tabla" Orientation="Vertical">
+                </StackPanel>
+        </ScrollViewer>
+        <TextBlock HorizontalAlignment="Right" Name="poruka" VerticalAlignment="Top" Text="Oprez, unosom postojeceg kljuca birate da menjate postojeci entitet!!!" Foreground="Red" FontSize="15" TextWrapping="Wrap" FontWeight="ExtraBold" Margin="600 60 50 20"/>
+        <Button Background="LightSteelBlue" Foreground="Red" Name="Delete" Width="50" Height="20" Content="Brisi" FontSize="15" Margin="20,20,75,10" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="Delete_Click" ToolTip="Brisanje u zavisnosti od kljuca za doticnu grupu"/>
+        <Button Background="LightSteelBlue" Foreground="Navy" x:Name="Prikazi" Width="50" Height="20" Content="Prikazi" FontSize="15" Margin="0,0,140,10" HorizontalAlignment="Right" VerticalAlignment="Bottom" ToolTip="Brisanje u zavisnosti od kljuca za doticnu grupu" Click="Prikazi_Click"/>
+    </Grid>
+</Window>
